@@ -1,7 +1,7 @@
 {
   "name": "tirs/tirs-configuration",
   "type": "typo3-cms-extension",
-  "description": "Base frontend configuration",
+  "description": "Base frontend and backend configuration with useful core patches and ViewHelpers",
   "homepage": "http://www.pavel-leonidov.de",
   "license": [
 	"GPL-2.0+"
