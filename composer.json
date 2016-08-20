@@ -1,0 +1,50 @@
+{
+  "name": "tirs/tirs-configuration",
+  "type": "typo3-cms-extension",
+  "description": "Base frontend configuration",
+  "homepage": "http://www.pavel-leonidov.de",
+  "license": [
+	"GPL-2.0+"
+  ],
+  "version": "8.2.0",
+  "require": {
+	"typo3/cms-core": ">=7.6",
+	"typo3/cms-fluid-styled-content": "*",
+	"components/jquery": "~2.2"
+  },
+  "autoload": {
+	"psr-4": {
+	  "TIRS\\TirsConfiguration\\": "Classes"
+	}
+  },
+  "authors": [
+	{
+	  "name": "Pavel Leonidov",
+	  "role": "Developer",
+	  "homepage": "http://www.pavel-leonidov.de"
+	}
+  ],
+  "replace": {
+	"exc_configuration": "self.version"
+  },
+  "config": {
+	"vendor-dir": ".Build/vendor",
+	"bin-dir": ".Build/bin"
+  },
+  "scripts": {
+	"post-autoload-dump": [
+	  "mkdir -p .Build/Web/typo3conf/ext/",
+	  "[ -L .Build/Web/typo3conf/ext/tirs_configuration ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/tirs_configuration"
+	]
+  },
+  "extra": {
+	"branch-alias": {
+	  "dev-master": "master"
+	},
+	"typo3/cms": {
+	  "cms-package-dir": "{$vendor-dir}/typo3/cms",
+	  "web-dir": ".Build/Web"
+	}
+  }
+}
+
