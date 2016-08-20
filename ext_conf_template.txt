@@ -1,0 +1,5 @@
+# ======================================================================
+# Extension Settings
+# ======================================================================
+# cat=Default Configuration/settings/160; type=boolean; label=Include configuration files: Load default system configuration
+includeConfigurationFiles = 1
