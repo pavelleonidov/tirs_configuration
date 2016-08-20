@@ -23,7 +23,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ******************************************************************/
 
-namespace EXCONCEPT\Configuration\ViewHelpers;
+namespace TIRS\TirsConfiguration\ViewHelpers;
 
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
