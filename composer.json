@@ -25,7 +25,7 @@
 	}
   ],
   "replace": {
-	"exc_configuration": "self.version"
+	"tirs_configuration": "self.version"
   },
   "config": {
 	"vendor-dir": ".Build/vendor",
