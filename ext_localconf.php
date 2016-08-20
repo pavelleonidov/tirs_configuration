@@ -36,6 +36,12 @@ if (!empty($GLOBALS['TIRS_SETTINGS']['includeConfigurationFiles'])) {
 	// @TODO: Provide system configuration files (RealURL base configuration etc.)
 }
 
+if (!empty($GLOBALS['TIRS_SETTINGS']['patchFileDumper'])) {
+	$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Core\Controller\FileDumpController::class] = array(
+		'className' => TIRS\TirsConfiguration\Hooks\Core\Controller\FileDumpController::class
+	);
+}
+
 
 
 ?>

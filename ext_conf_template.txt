@@ -3,3 +3,6 @@
 # ======================================================================
 # cat=Default Configuration/settings/160; type=boolean; label=Include configuration files: Load default system configuration
 includeConfigurationFiles = 1
+
+# cat=Default Configuration/settings/160; type=boolean; label=Patch file dumper: Patch dumper to automatically force download of a file when the core stream parameters are being used (e. g. in the tirs:link.download ViewHelper)
+patchFileDumper = 1
