@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+     <file source-language="en" datatype="plaintext" original="messages" date="2016-02-05T18:20:51Z" product-name="exc-configuration">
+             <header/>
+             <body>
+                     <trans-unit id="pages.logo" xml:space="preserve">
+                             <source>Logo</source>
+                     </trans-unit>
+             </body>
+     </file>
+</xliff>
