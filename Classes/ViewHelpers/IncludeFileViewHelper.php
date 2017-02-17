@@ -57,38 +57,53 @@ class IncludeFileViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVie
 	 * @param bool $compress Define if file should be compressed
 	 * @param bool $footer Define if file should be included to bottom
 	 * @param bool $async Define if file should be asynchronously loaded
+	 * @param string $type Define extension type
 	 * @return void
 	 */
-	public function render($path, $compress = false, $bottom=false, $async=false)
+	public function render($path, $compress = false, $bottom=false, $async=false, $type = '')
 	{
 		$pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
 		$path = TYPO3_MODE == 'FE' ? $GLOBALS['TSFE']->tmpl->getFileName($path) : $path;
-
-		$fileExt = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-
-		switch($fileExt) {
-			case "js":
+		if($type && substr($path, 0, 7) == 'http://' || substr($path, 0, 8) == 'https://') {
+			$method = '';
+			if($type == 'text/css') {
+				$method = $bottom ? 'addCssFooterFile' : 'addCssFile';
+				$pageRenderer->$method($path, 'stylesheet', 'all', '', FALSE, false, '', TRUE);
+			} elseif ($type=='text/javascript') {
 				$method = $bottom ? 'addJsFooterFile' : 'addJsFile';
-				$pageRenderer->$method($path, 'text/javascript', $compress, false, '', !$compress, '|', $async);
-				break;
-			case "css":
-				$method = $bottom ? 'addCssFooterFile' : 'addCssFile';
-				$pageRenderer->$method($path, 'stylesheet', 'all', '', $compress, false, '', !$compress);
-				break;
-			case "scss":
-				$method = $bottom ? 'addCssFooterFile' : 'addCssFile';
-				// Note: as leafo's scssphp often does not properly compile SCSS code, this option is abandoned now. There are better ways to implement runtime compiler, e. g. node-sass with nodemon (See https://github.com/pavelleonidov/tirs_foundation for a working package.json configuration)
+				$pageRenderer->$method($path, 'text/javascript', FALSE, false, '', TRUE, '|', $async);
+			}
+			if($method) {
+				$pageRenderer->$method($path, $type, 'all', false, '', TRUE, '|', TRUE);
+			}
+		} else {
+			$fileExt = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
-				/*if(TYPO3_MODE == 'FE') {
-					$file = basename($path);
-					$dir = dirname(str_replace("typo3conf/ext/", "", $path));
-					$pageRenderer->$method($GLOBALS['TSFE']->tmpl->getFileName("EXT:tirs_configuration/Resources/Public/PHP/scss.php?dir=" . $dir . "&p=" . $file), 'stylesheet', 'all', '', false, false, '', true);
-				}*/
+			switch($fileExt) {
+				case "js":
+					$method = $bottom ? 'addJsFooterFile' : 'addJsFile';
+					$pageRenderer->$method($path, 'text/javascript', $compress, false, '', !$compress, '|', $async);
+					break;
+				case "css":
+					$method = $bottom ? 'addCssFooterFile' : 'addCssFile';
+					$pageRenderer->$method($path, 'stylesheet', 'all', '', $compress, false, '', !$compress);
+					break;
+				case "scss":
+					$method = $bottom ? 'addCssFooterFile' : 'addCssFile';
+					// Note: as leafo's scssphp often does not properly compile SCSS code, this option is abandoned now. There are better ways to implement runtime compiler, e. g. node-sass with nodemon (See https://github.com/pavelleonidov/tirs_foundation for a working package.json configuration)
 
-				break;
-			default:
-				throw new \Exception("invalid file format", 12800912);
-				break;
+					/*if(TYPO3_MODE == 'FE') {
+						$file = basename($path);
+						$dir = dirname(str_replace("typo3conf/ext/", "", $path));
+						$pageRenderer->$method($GLOBALS['TSFE']->tmpl->getFileName("EXT:tirs_configuration/Resources/Public/PHP/scss.php?dir=" . $dir . "&p=" . $file), 'stylesheet', 'all', '', false, false, '', true);
+					}*/
+
+					break;
+				default:
+
+					throw new \Exception("invalid file format", 12800912);
+					break;
+			}
 		}
 	}
 }
