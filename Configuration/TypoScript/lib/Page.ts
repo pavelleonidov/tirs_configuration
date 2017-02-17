@@ -16,6 +16,8 @@ page {
             value.1 = de_DE
             value.2 = en_US
         }
+        viewport = width=device-width, initial-scale=1.0
+
     }
     10 < lib.pageContent
     10 {
