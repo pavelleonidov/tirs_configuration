@@ -42,6 +42,14 @@ if (!empty($GLOBALS['TIRS_SETTINGS']['patchFileDumper'])) {
 	);
 }
 
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Core\Resource\Processing\ImageCropScaleMaskTask::class] = array(
+	'className' => TIRS\TirsConfiguration\Hooks\Core\Resource\Processing\ImageCropScaleMaskTask::class
+);
+
+// Hooks
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][GridElementsTeam\Gridelements\Plugin\Gridelements::class] = array(
+	'className' => TIRS\TirsConfiguration\Hooks\Gridelements\Plugin\Gridelements::class
+);
 
 
 ?>
