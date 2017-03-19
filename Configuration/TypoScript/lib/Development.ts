@@ -5,6 +5,11 @@
 config.no_cache = 1
 config.debug = 1
 
+config.concatenateCss = 0
+config.concatenateJs = 0
+config.compressJs = 0
+config.compressCss = 0
+
 ## Display notification
 page.2 = TEXT
 page.2 {

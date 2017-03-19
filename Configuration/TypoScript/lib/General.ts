@@ -7,10 +7,15 @@ config {
     sys_language_isocode_default = de
 
     headerComment (
-(C) 2016 Pavel Leonidov
+(C) 2017 Pavel Leonidov
     Reference: http://www.pavel-leonidov.de
     )
 }
+
+config.concatenateCss = 1
+config.concatenateJs = 1
+config.compressJs = 1
+config.compressCss = 1
 
 [globalVar = GP:L = 1]
     config.sys_language_uid = 1
