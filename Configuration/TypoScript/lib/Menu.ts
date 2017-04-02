@@ -137,3 +137,11 @@ lib.basemenu {
 }
 
 lib.menu < lib.basemenu
+
+lib.submenu < lib.basemenu
+
+lib.submenu {
+    special = directory
+    special.value.data = leveluid : 1
+    entryLevel = 1
+}

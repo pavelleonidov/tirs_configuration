@@ -67,6 +67,7 @@ class IncludeFileViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVie
 		if($type && substr($path, 0, 7) == 'http://' || substr($path, 0, 8) == 'https://') {
 			$method = '';
 			if($type == 'text/css') {
+
 				$method = $bottom ? 'addCssFooterFile' : 'addCssFile';
 				$pageRenderer->$method($path, 'stylesheet', 'all', '', FALSE, false, '', TRUE);
 			} elseif ($type=='text/javascript') {
