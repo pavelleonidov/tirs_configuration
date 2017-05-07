@@ -13,22 +13,17 @@ lib.pageContent {
         }
     }
     templateRootPaths {
-        0 = EXT:tirs_configuration/Resources/Private/Templates
+        0 = EXT:tirs_configuration/Resources/Private/Templates/
+        10 = {$tirs_configuration.templates.templateRootPath}
     }
     partialRootPaths {
-        0 = EXT:tirs_configuration/Resources/Private/Partials
+        0 = EXT:tirs_configuration/Resources/Private/Partials/
+        10 = {$tirs_configuration.templates.partialRootPath}
     }
     layoutRootPaths {
-        0 = EXT:tirs_configuration/Resources/Private/Layouts
+        0 = EXT:tirs_configuration/Resources/Private/Layouts/
+        10 = {$tirs_configuration.templates.layoutRootPath}
     }
-}
-
-# extend lib.fluidContent from fluid_styled_content
-lib.fluidContent {
-    templateRootPaths.20 = {$tirs_configuration.templates.templateRootPath}
-    partialRootPaths.20 = {$tirs_configuration.templates.partialRootPath}
-    layoutRootPaths.20 = {$tirs_configuration.templates.layoutRootPath}
-
 }
 
 # Take logo if exists, otherwise output the page title

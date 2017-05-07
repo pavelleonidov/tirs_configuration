@@ -19,13 +19,14 @@ page {
         viewport = width=device-width, initial-scale=1.0
 
     }
-    10 < lib.pageContent
+    10 =< lib.pageContent
     10 {
+
         variables {
             content < styles.content.get
 
-            visual < .content
-            visual.select.where = colPos = 1
+            visual < styles.content.get
+            visual.select.where = {#colPos}=1
 
             menu < lib.menu
             logo < lib.logo
