@@ -35,36 +35,21 @@ class ImageCropScaleMaskTask extends \TYPO3\CMS\Core\Resource\Processing\ImageCr
 	 */
 	protected function determineTargetFileExtension()
 	{
+
+
 		if (!empty($this->configuration['fileExtension'])) {
 			$targetFileExtension = $this->configuration['fileExtension'];
-		} else {
-			// explanation for "thumbnails_png"
-			// Bit0: If set, thumbnails from non-jpegs will be 'png', otherwise 'gif' (0=gif/1=png).
-			// Bit1: Even JPG's will be converted to png or gif (2=gif/3=png)
-
-			$targetFileExtensionConfiguration = $GLOBALS['TYPO3_CONF_VARS']['GFX']['thumbnails_png'];
-			if ($this->getSourceFile()->getExtension() === 'jpg' || $this->getSourceFile()->getExtension() === 'jpeg') {
-				if ($targetFileExtensionConfiguration == 2) {
-					$targetFileExtension = 'gif';
-				} elseif ($targetFileExtensionConfiguration == 3) {
-					$targetFileExtension = 'png';
-				} else {
-					$targetFileExtension = 'jpg';
-				}
-			} else {
-				// check if a png or a gif should be created
-				if ($targetFileExtensionConfiguration == 1 || $this->getSourceFile()->getExtension() === 'png') {
-					$targetFileExtension = 'png';
-				}
-				elseif ($targetFileExtensionConfiguration == 4) {
-					$targetFileExtension = 'jpg';
-				} else {
-					// thumbnails_png is "0"
-					$targetFileExtension = 'gif';
-				}
-			}
+		} elseif (in_array($this->getSourceFile()->getExtension(), ['jpg', 'jpeg', 'png', 'gif'], true)) {
+			$targetFileExtension = $this->getSourceFile()->getExtension();
+			// If true, thumbnails from non-processable files will be converted to 'png', otherwise 'gif'
+		} elseif ($this->getSourceFile()->getExtension() == 'pdf') {
+			$targetFileExtension = 'jpg';
 		}
-
+		elseif ($GLOBALS['TYPO3_CONF_VARS']['GFX']['thumbnails_png']) {
+			$targetFileExtension = 'png';
+		} else {
+			$targetFileExtension = 'gif';
+		}
 		return $targetFileExtension;
 	}
 }
