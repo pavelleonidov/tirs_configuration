@@ -83,7 +83,7 @@ class DownloadViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBas
 		}
 
 		$queryParameterArray['token'] = GeneralUtility::hmac(implode('|', $queryParameterArray), 'resourceStorageDumpFile');
-		$publicUrl = 'index.php?' . str_replace('+', '%20', http_build_query($queryParameterArray));
+		$publicUrl = '/index.php?' . str_replace('+', '%20', http_build_query($queryParameterArray));
 
 
 		$this->tag->addAttribute('href', $publicUrl);
