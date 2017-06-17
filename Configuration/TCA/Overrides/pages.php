@@ -39,9 +39,21 @@ $tempColumns = [
 			'foreign_types' => $GLOBALS['TCA']['tt_content']['columns']['image']['config']['foreign_types']
 		], $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext'])
 	],
+	'background_visual' => [
+		'exclude' => 1,
+		'label' => $ll . 'pages.backgroundVisual',
+		'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('background_visual', [
+			'appearance' => [
+				'createNewRelationLinkTitle' => $fscPrefix . 'tt_content.asset_references.addFileReference'
+			],
+			// custom configuration for displaying fields in the overlay/reference table
+			// behaves the same as the image field.
+			'foreign_types' => $GLOBALS['TCA']['tt_content']['columns']['image']['config']['foreign_types']
+		], $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext'])
+	],
 ];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', $tempColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', '--div--;' . $ll . 'pages.logo, logo');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', '--div--;' . $ll . 'pages.headerMedia, logo, background_visual');
 
 ?>

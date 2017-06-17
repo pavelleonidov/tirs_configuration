@@ -29,6 +29,7 @@ page {
             visual.select.where = {#colPos}=1
 
             menu < lib.menu
+            backgroundVisual < lib.backgroundVisual
             logo < lib.logo
 
             productionMode < lib.productionMode

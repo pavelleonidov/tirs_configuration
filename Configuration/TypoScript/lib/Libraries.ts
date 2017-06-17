@@ -50,6 +50,37 @@ lib.logo {
     }
 }
 
+# background visual
+
+/*
+lib.backgroundVisual = FILES
+lib.backgroundVisual {
+    #if.isTrue.data = levelfield:-1, background_visual
+    begin = 0
+    maxItems = 1
+    references {
+        table = pages
+        data = levelfield:-1, background_visual, slide
+        fieldName = background_visual
+    }
+    renderObj = IMG_RESOURCE
+    renderObj {
+        file.import.data = file:current:publicUrl
+    }
+}
+*/
+
+
+lib.backgroundVisual = IMG_RESOURCE
+lib.backgroundVisual {
+    file {
+        import.data = levelfield:-1, background_visual, slide
+        treatIdAsReference = 1
+        import.listNum = 0
+    }
+}
+
+
 # Get application context
 lib.productionMode = TEXT
 lib.productionMode.value = 0

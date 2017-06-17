@@ -6,6 +6,12 @@
                      <trans-unit id="pages.logo" xml:space="preserve">
                              <source>Logo</source>
                      </trans-unit>
+                     <trans-unit id="pages.backgroundVisual" xml:space="preserve">
+                             <source>Background visual</source>
+                     </trans-unit>
+                     <trans-unit id="pages.headerMedia" xml:space="preserve">
+                             <source>Header media</source>
+                     </trans-unit>
              </body>
      </file>
 </xliff>
