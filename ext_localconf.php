@@ -23,6 +23,8 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ******************************************************************/
 
+$extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);
+
 // Get extension configuration
 $GLOBALS['TIRS_SETTINGS'] = array();
 if (!empty($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['tirs_configuration'])) {
@@ -33,7 +35,9 @@ if (!empty($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['tirs_configuration']))
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/PageTSConfig/main.ts">');
 
 if (!empty($GLOBALS['TIRS_SETTINGS']['includeConfigurationFiles'])) {
-	// @TODO: Provide system configuration files (RealURL base configuration etc.)
+	if (TYPO3_MODE == 'FE') {
+		include_once($extensionPath . 'Configuration/System/RealUrl.php');
+	}
 }
 
 if (!empty($GLOBALS['TIRS_SETTINGS']['patchFileDumper'])) {
