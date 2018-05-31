@@ -1,8 +1,9 @@
 <?php
+namespace TIRS\TirsConfiguration\ViewHelpers;
 /*******************************************************************
  *  Copyright notice
  *
- *  (c) 2016 Pavel Leonidov <pavel.leonidov@exconcept.com>, EXCONCEPT GmbH
+ *  (c) 2016 - 2018 Pavel Leonidov <info@pavel-leonidov.de>
  *
  *  All rights reserved
  *
@@ -23,7 +24,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ******************************************************************/
 
-namespace TIRS\TirsConfiguration\ViewHelpers;
+
 
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -34,14 +35,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * # Example: Basic example
  * <code>
- * <exc:includeFile path="{settings.cssFile}" />
+ * <tirs:includeFile path="{settings.cssFile}" />
  * </code>
  * <output>
  * This will include the file provided by {settings} in the header
  *
  * To include the file in the footer, use the ViewHelper like this:
  * <code>
- * <exc:includeFile path="{settings.cssFile}" footer="TRUE" />
+ * <tirs:includeFile path="{settings.cssFile}" footer="TRUE" />
  * </code>
  *
  * </output>
@@ -49,7 +50,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class IncludeFileViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
 	/**
 	 * Include a CSS/JS file
 	 *
@@ -67,7 +67,6 @@ class IncludeFileViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVie
 		if($type && substr($path, 0, 7) == 'http://' || substr($path, 0, 8) == 'https://') {
 			$method = '';
 			if($type == 'text/css') {
-
 				$method = $bottom ? 'addCssFooterFile' : 'addCssFile';
 				$pageRenderer->$method($path, 'stylesheet', 'all', '', FALSE, false, '', TRUE);
 			} elseif ($type=='text/javascript') {
@@ -79,7 +78,6 @@ class IncludeFileViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVie
 			}
 		} else {
 			$fileExt = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-
 			switch($fileExt) {
 				case "js":
 					$method = $bottom ? 'addJsFooterFile' : 'addJsFile';
@@ -92,16 +90,13 @@ class IncludeFileViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVie
 				case "scss":
 					$method = $bottom ? 'addCssFooterFile' : 'addCssFile';
 					// Note: as leafo's scssphp often does not properly compile SCSS code, this option is abandoned now. There are better ways to implement runtime compiler, e. g. node-sass with nodemon (See https://github.com/pavelleonidov/tirs_foundation for a working package.json configuration)
-
 					/*if(TYPO3_MODE == 'FE') {
 						$file = basename($path);
 						$dir = dirname(str_replace("typo3conf/ext/", "", $path));
 						$pageRenderer->$method($GLOBALS['TSFE']->tmpl->getFileName("EXT:tirs_configuration/Resources/Public/PHP/scss.php?dir=" . $dir . "&p=" . $file), 'stylesheet', 'all', '', false, false, '', true);
 					}*/
-
 					break;
 				default:
-
 					throw new \Exception("invalid file format", 12800912);
 					break;
 			}

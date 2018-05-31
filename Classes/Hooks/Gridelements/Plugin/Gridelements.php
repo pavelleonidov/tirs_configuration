@@ -56,17 +56,24 @@ class Gridelements extends \GridElementsTeam\Gridelements\Plugin\Gridelements {
 		// each of the children will now be rendered separately and the output will be added to it's particular column
 		$rawColumns = array();
 		if (!empty($this->cObj->data['tx_gridelements_view_children'])) {
-			$i = 0;
 			foreach ($this->cObj->data['tx_gridelements_view_children'] as $child) {
+
 				$rawColumns[$child['tx_gridelements_columns']][] = $child;
+
+				$key = key($rawColumns[$child['tx_gridelements_columns']]);
+
 				$renderedChild = $child;
 				$this->renderChildIntoParentColumn($columns, $renderedChild, $parentGridData, $parentRecordNumbers,
 					$typoScriptSetup);
-				$rawColumns[$child['tx_gridelements_columns']][$i]['rawData'] = $currentParentGrid['data']['tx_gridelements_view_child_' . $child['uid']] = $renderedChild;
+
+				$rawColumns[$child['tx_gridelements_columns']][$key]['rawData'] = $currentParentGrid['data']['tx_gridelements_view_child_' . $child['uid']] =  $renderedChild;
+
+				next($rawColumns[$child['tx_gridelements_columns']]);
 				unset($renderedChild);
-				$i++;
+
 			}
 			$currentParentGrid['data']['tx_gridelements_view_raw_columns'] = $rawColumns;
+
 		}
 
 		// now we can reset the depth counter and the data array so that the element will behave just as usual
@@ -93,3 +100,5 @@ class Gridelements extends \GridElementsTeam\Gridelements\Plugin\Gridelements {
 
 	}
 }
+
+?>

@@ -35,7 +35,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 
 class FileDumpController extends \TYPO3\CMS\Core\Controller\FileDumpController {
-
 	/**
 	 * Overriding core dump controller to set the content disposition to "attachment" by default
 	 *
@@ -63,7 +62,6 @@ class FileDumpController extends \TYPO3\CMS\Core\Controller\FileDumpController {
 		if ($p) {
 			$parameters['p'] = $p;
 		}
-
 		if (GeneralUtility::hmac(implode('|', $parameters), 'resourceStorageDumpFile') === $this->getGetOrPost($request, 'token')) {
 			if (isset($parameters['f'])) {
 				$file = ResourceFactory::getInstance()->getFileObject($parameters['f']);
@@ -76,11 +74,9 @@ class FileDumpController extends \TYPO3\CMS\Core\Controller\FileDumpController {
 					$file = null;
 				}
 			}
-
 			if ($file === null) {
 				HttpUtility::setResponseCodeAndExit(HttpUtility::HTTP_STATUS_404);
 			}
-
 			// Hook: allow some other process to do some security/access checks. Hook should issue 403 if access is rejected
 			if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['FileDumpEID.php']['checkFileAccess'])) {
 				foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['FileDumpEID.php']['checkFileAccess'] as $classRef) {
@@ -91,7 +87,6 @@ class FileDumpController extends \TYPO3\CMS\Core\Controller\FileDumpController {
 					$hookObject->checkFileAccess($file);
 				}
 			}
-
 			$file->getStorage()->dumpFileContents($file, true);
 			exit;
 		} else {
@@ -99,5 +94,7 @@ class FileDumpController extends \TYPO3\CMS\Core\Controller\FileDumpController {
 		}
 	}
 }
+
+?>
 
 ?>
