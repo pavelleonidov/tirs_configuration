@@ -24,6 +24,38 @@ lib.pageContent {
         0 = EXT:tirs_configuration/Resources/Private/Layouts/
         10 = {$tirs_configuration.templates.layoutRootPath}
     }
+
+    # Menu processor
+
+    dataProcessing {
+        # Main menu
+        10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        10 {
+            special = directory
+            special.value = {$tirs_configuration.rootPid}
+            levels = 4
+            includeSpacer = 1
+            as = menuMain
+
+            dataProcessing {
+                10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+                10 {
+                    references.fieldName = media
+                    as = pageMedia
+                }
+            }
+        }
+
+        # Submenu
+        20 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        20 {
+            levels = 2
+            entryLevel = 1
+            expandAll = 0
+            includeSpacer = 1
+            as = menuSub
+        }
+    }
 }
 
 # Take logo if exists, otherwise output the page title

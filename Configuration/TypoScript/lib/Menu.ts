@@ -1,6 +1,7 @@
 # ======================================================================
 # Menu configuration with additional classes for first/last menu elements
 # ======================================================================
+# Note: Deprecated: Use the Menu Processor instead (See Libraries.ts)
 
 lib.basemenu = HMENU
 lib.basemenu {

@@ -20,4 +20,6 @@ tirs_configuration {
 		partialRoothPath =
 		layoutRootPath =
 	}
+
+	rootPid = 1
 }
