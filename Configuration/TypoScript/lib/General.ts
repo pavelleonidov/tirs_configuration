@@ -33,14 +33,14 @@ config.compressCss = 1
 # additional html classes
 config.htmlTag_stdWrap = COA
 config.htmlTag_stdWrap {
-    # language code to html tag
-    10 = COA
-    10 {
-        wrap = class="|"
-        10 = TEXT
-        10.data = TSFE:sys_language_isocode
-    }
+    cObject = TEXT
+    cObject.value (
+<!--[if lt IE 7]>      <html lang="{TSFE:sys_language_isocode}" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="{TSFE:sys_language_isocode}" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="{TSFE:sys_language_isocode}" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="{TSFE:sys_language_isocode}" class="no-js"> <!--<![endif]-->
+    )
+    cObject.insertData = 1
 }
-
 page = PAGE
 page.typeNum = 0
